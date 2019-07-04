@@ -1,0 +1,15 @@
+<div class="new-order container">
+  
+  <app-personal-form [parentForm]="myForm">
+  </app-personal-form>
+
+  <app-pizza-form 
+    (add)="addPizza()"
+    (submitOrder)="createOrder($event)"
+    [pizzasForm]="myForm.get('pizzas')">
+  </app-pizza-form>
+
+  <app-pizza-summary [pizzasForm]="myForm.get('pizzas')">
+  </app-pizza-summary>
+
+</div>
