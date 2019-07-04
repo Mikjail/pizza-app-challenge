@@ -1,0 +1,15 @@
+.app {
+  height: 93%;
+  display: flex;
+  flex: 1 1;
+
+}
+
+.page {
+  width: 96%;
+  background-color: white;
+  flex-flow: column wrap;
+  transition: 0.4s;
+  margin-right: 5%;
+  border-radius: 5px;
+}

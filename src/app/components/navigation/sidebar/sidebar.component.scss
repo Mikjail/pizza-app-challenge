@@ -1,0 +1,53 @@
+@import '../../../../variables.scss';
+$sidebar-border-color: transparent;
+$sidebar-bg-color: $primary;
+$sidebar-font-color: white;
+$sidebar-hover-bg-color: $primary;
+
+.sidebar {
+  background-color: $sidebar-bg-color;
+  border-bottom: 2px solid $btn-background;
+  margin-top: 50px;
+  height: 30%;
+  width: 236px;
+  overflow-y: hidden;
+  transition: 0.4s;
+}
+
+
+.sidebar-item {
+  cursor: pointer;
+  margin-left:20px;
+  padding: 10px 15px 10px 30px;
+  color: $sidebar-font-color;
+  height: 50px;
+  overflow: hidden;
+  a {
+    text-decoration: none;
+    color: $sidebar-font-color;
+  }
+
+  .fa,.fas,.fab {
+    max-width: 15px;
+    max-height: 15px;
+    margin-right: 15px;
+  }
+
+  &.active {
+    background-color: $sidebar-hover-bg-color;
+  }
+
+  &.no-hover:hover {
+    background-color: $sidebar-bg-color;
+  }
+
+  &:hover {
+    background-color: $sidebar-hover-bg-color;
+  }
+}
+
+.hand {
+  cursor: pointer;
+}
+
+
