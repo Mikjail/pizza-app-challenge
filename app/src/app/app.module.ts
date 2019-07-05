@@ -11,6 +11,8 @@ import { PersonalFormComponent } from './components/personal-form/personal-form.
 import { PizzaFormComponent } from './components/pizza-form/pizza-form.component';
 import { NewOrderComponent } from './containers/new-order/new-order.component';
 import { PizzaSummaryComponent } from './components/pizza-summary/pizza-summary.component';
+import { StatusComponent } from './containers/status/status.component';
+import { StatusOrdersComponent } from './components/status-orders/status-orders.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PizzaSummaryComponent } from './components/pizza-summary/pizza-summary.
     PersonalFormComponent,
     PizzaFormComponent,
     NewOrderComponent,
-    PizzaSummaryComponent
+    PizzaSummaryComponent,
+    StatusComponent,
+    StatusOrdersComponent
   ],
   imports: [
     BrowserModule,

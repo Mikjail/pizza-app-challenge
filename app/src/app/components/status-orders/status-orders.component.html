@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-sm-8">
+    <label>Total item in inventory</label>
+    <div class="">
+      {{totalItems}} items
+    </div>
+    <div class="order-status__bar">
+      <div class="order-status__bar__completed" [style.width.%]="completedWidth"></div>
+      <div class="order-status__bar__pending" [style.width.%]="pendingWidth"></div>
+      <div class="order-status__bar__cancelled" [style.width.%]="cancelledWidth"></div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row order-status__details">
+
+  <div class="col-sm-2 order-status__details__completed">
+    <div class="order-status__details__completed__circle"></div>
+    <div class="order-status__details__completed__detail">
+      <label>Completed</label>
+      <span>{{countCompleted}}</span>
+    </div>
+  </div>
+  <div class="col-sm-2 order-status__details__pending">
+    <div class="order-status__details__pending__circle"></div>
+    <div class="order-status__details__pending__detail">
+      <label>Pending</label>
+      <span>{{countPending}}</span>
+    </div>
+  </div>
+  <div class="col-sm-2 order-status__details__cancelled">
+    <div class="order-status__details__cancelled__circle"></div>
+    <div class="order-status__details__cancelled__detail">
+      <label>Cancelled</label>
+      <span>{{countCancelled}}</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table class="order-status__table">
+      <thead>
+        <th>
+          Item ID
+        </th>
+        <th>
+          Address
+        </th>
+        <th>
+          Ordered Time
+        </th>
+        <th>
+          Status/Action
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>
+            {{order.id}}
+          </td>
+          <td>
+            {{order.address}}
+          </td>
+          <td>
+            {{order.createdAt}}
+          </td>
+          <td>
+            <span class="order-status__table__action--direction" *ngIf="order.status ==='pending'">
+              <a class=" order-status__table__action__accept" href="#">
+                Accept
+              </a>
+              <a class="order-status__table__action__cancel" href="#">
+                Cancel
+              </a>
+            </span>
+            <span class="order-status__table__action" *ngIf="order.status !== 'pending'">
+              <span class="order-status__table__action__title">
+                {{order.status}}
+              </span>
+              <a href="#" class="order-status__table__action__completed"
+                *ngIf="order.status === 'accepted' || order.status === 'in-transit'">
+                Mark as completed
+              </a>
+            </span>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
