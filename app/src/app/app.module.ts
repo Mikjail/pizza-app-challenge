@@ -1,3 +1,4 @@
+import { PizzaService } from './containers/new-order/new-order.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { NewOrderComponent } from './containers/new-order/new-order.component';
 import { PizzaSummaryComponent } from './components/pizza-summary/pizza-summary.component';
 import { StatusComponent } from './containers/status/status.component';
 import { StatusOrdersComponent } from './components/status-orders/status-orders.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,14 @@ import { StatusOrdersComponent } from './components/status-orders/status-orders.
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgbCollapseModule
   ],
-  providers: [],
+  providers: [
+    PizzaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

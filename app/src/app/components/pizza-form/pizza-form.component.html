@@ -11,56 +11,45 @@
 
 <div [formGroup]="pizza" class="pizza" *ngFor="let pizza of pizzasForm.controls; let i= index">
   <div class="pizza__header row">
-      <div class="pizza__header__title col-sm-12"  
-      (click)="isCollapsed[i] = !isCollapsed[i]" 
-      [attr.aria-expanded]="!isCollapsed"
+    <div class="pizza__header__title col-sm-12" 
+    (click)="isCollapsed[i] = !isCollapsed[i]"
+      [attr.aria-expanded]="!isCollapsed" 
       aria-controls="collapseExample">
-        <h5>PIZZA {{i+1}}</h5>
-        <div class="float-right">
-          <span class="pizza__header__title__btn" >
-            <i *ngIf="!isCollapsed[i]" class="fas fa-caret-up"></i>
-            <i *ngIf="isCollapsed[i]" class="fas fa-caret-down"></i>
-          </span>
-        </div>
+      <h5>PIZZA {{i+1}}</h5>
+      <div class="float-right">
+        <span class="pizza__header__title__btn">
+          <i *ngIf="!isCollapsed[i]" class="fas fa-caret-up"></i>
+          <i *ngIf="isCollapsed[i]" class="fas fa-caret-down"></i>
+        </span>
       </div>
     </div>
-    <div [ngbCollapse]="isCollapsed[i]">
-      <div  class="pizza__size row">
-        <label class="col-sm-12 pizza__size__title" for="size">Choose Size</label>
-        <div class="pizza__size__btn col-sm-2">
-          <input formControlName="size" type="radio" name="" value="large" >
-          <label for="Large">
-              LARGE
-          </label> 
-        </div>
-        <div class="pizza__size__btn col-sm-2">
-          <input formControlName="size" type="radio" name="" value="medium">
-          <label for="Medium">
-              MEDIUM
-          </label> 
-        </div>
-        <div class="pizza__size__btn col-sm-2">
-          <input formControlName="size" type="radio" name="" value="small">
-          <label for="Small">
-              SMALL
-          </label> 
-        </div>
-      </div>
-      <div class="pizza__toppings row">
-        <label class="col-sm-12 pizza__toppings__title" for="toppings">Pick your toppings</label>
-        <div *ngFor="let topping of toppings" class="col-md-3 col-sm-4 pizza__toppings__checkbox">
-            <input 
-              class="checkbox-custom"  
-              type="checkbox" 
-              (change)="updateTopping(topping,i)"
-              [attr.name]="topping" 
-              [attr.value]="topping"
-              >
-            <label class="checkbox-custom-label form-check-label" for="defaultCheck1">
-              {{topping | uppercase }}
-            </label>
-        </div>
+  </div>
+  <div [ngbCollapse]="isCollapsed[i]">
+    <div class="pizza__size row" *ngIf="pizzaInfo">
+      <label class="col-sm-12 pizza__size__title" for="size">Choose Size</label>
+      <div class="pizza__size__btn col-sm-2" *ngFor="let size of pizzaInfo.sizes">
+        <input 
+          formControlName="size" 
+          type="radio" name="" 
+          [value]="size" 
+          (change)="updateSize(size, i)">
+        <label for="size">
+          {{size | uppercase}}
+        </label>
       </div>
     </div>
-  </div>      
-
+    <div class="pizza__toppings row" *ngIf="pizzaInfo">
+      <label class="col-sm-12 pizza__toppings__title" for="toppings">Pick your toppings</label>
+      <div *ngFor="let topping of pizzaInfo.toppings" class="col-md-3 col-sm-4 pizza__toppings__checkbox">
+        <input 
+          class="checkbox-custom" 
+          type="checkbox" (change)="updateTopping(topping,i)"
+          [attr.name]="topping"
+          [attr.value]="topping">
+        <label class="checkbox-custom-label form-check-label" for="defaultCheck1">
+          {{topping | uppercase }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

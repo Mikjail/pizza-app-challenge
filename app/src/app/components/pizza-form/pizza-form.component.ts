@@ -1,3 +1,5 @@
+import { Prices } from 'src/app/models/PizzaInfo';
+import { PizzaInfo } from './../../models/PizzaInfo';
 import { FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
@@ -11,17 +13,25 @@ export class PizzaFormComponent implements OnInit {
   @Input()
   pizzasForm: FormArray;
 
+  @Input()
+  pizzaInfo: PizzaInfo;
+
   @Output()
   add = new EventEmitter<any>();
 
   @Output()
   submitOrder = new EventEmitter<any>();
 
+  @Output()
+  updateSummary = new EventEmitter<any>();
+
   toppings = [
     'bacon', 'pepperoni', 'mushroom', 'olive', 'basil', 'sweetcorn',
     'onion', 'tomato'];
 
-  value = [];
+  toppingsSelected = [];
+
+  selection = [];
 
   isCollapsed: boolean[] = [];
 
@@ -33,27 +43,27 @@ export class PizzaFormComponent implements OnInit {
 
   addPizza() {
     this.add.emit();
-    this.isCollapsed[this.value.length - 1] = true;
+    this.isCollapsed[this.toppingsSelected.length - 1] = true;
   }
 
   onSubmit() {
-    for (let index = 0; index < this.value.length; index++) {
-      const toppingsForm = this.pizzasForm.controls[index] as FormGroup;
-      toppingsForm.controls.toppings.value.push(this.value[index]);
-    }
-
     this.submitOrder.emit(this.pizzasForm);
   }
 
+  updateSize(size: string, i) {
+      this.updateSummary.emit();
+  }
+
   updateTopping(topping: string, i) {
-    if (!this.value[i]) {
-      this.value[i] = [];
+    if (!this.toppingsSelected[i]) {
+      this.toppingsSelected[i] = [];
     }
-    if (this.value[i].includes(topping)) {
-      this.value[i] = this.value[i].filter((x: string) => topping !== x);
+    if (this.toppingsSelected[i].includes(topping)) {
+      this.toppingsSelected[i] = this.toppingsSelected[i].filter((x: string) => topping !== x);
     } else {
-      this.value[i].push(topping);
+      this.toppingsSelected[i].push(topping);
     }
-    this.pizzasForm.controls[i].get('toppings').setValue(this.value[i]);
+    this.pizzasForm.controls[i].get('toppings').setValue(this.toppingsSelected[i]);
+    this.updateSummary.emit();
   }
 }
