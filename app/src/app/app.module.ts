@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentModule } from 'ngx-moment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { PizzaSummaryComponent } from './components/pizza-summary/pizza-summary.
 import { StatusComponent } from './containers/status/status.component';
 import { StatusOrdersComponent } from './components/status-orders/status-orders.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StatusService } from './containers/status/status.service';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    MomentModule.forRoot({relativeTimeThresholdOptions: { m: 59}})
   ],
   providers: [
-    PizzaService
+    PizzaService,
+    StatusService
   ],
   bootstrap: [AppComponent]
 })

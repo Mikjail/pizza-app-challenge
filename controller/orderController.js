@@ -1,4 +1,5 @@
 const fs = require('fs');
+const moment = require('moment');
 const errorHandler = require('../util/errorHandler');
 const {calculatePrice, getData} = require('../util/utils')
 
@@ -34,8 +35,10 @@ ORDER_STATUS={
         details.id=Math.random().toString(36).slice(-5);
 
         details.total=total
-        
+
         details.status='pending';
+
+        details.createdAt= moment();
 
         if(!orderJson.orders){
             orderJson.orders=[];

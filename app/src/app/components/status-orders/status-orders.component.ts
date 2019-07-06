@@ -42,8 +42,8 @@ export class StatusOrdersComponent implements OnInit {
   }
 
   howManyMatch(status) {
-    const count = _.groupBy(this.orders, (orderDetail) => {
-      return orderDetail.order.status === status;
+    const count = _.groupBy(this.orders, (order) => {
+      return order.status === status;
     });
     if (count.true) {
       return count.true.length;

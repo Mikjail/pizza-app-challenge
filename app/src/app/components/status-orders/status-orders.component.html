@@ -64,7 +64,7 @@
             {{orderDetails.personalDetails.address}}
           </td>
           <td>
-            {{orderDetails.createdAt}}
+            {{orderDetails.createdAt | amTimeAgo}}
           </td>
           <td>
             <span class="order-status__table__action--direction" *ngIf="orderDetails.status ==='pending'">
