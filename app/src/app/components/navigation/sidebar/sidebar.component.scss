@@ -8,13 +8,11 @@ $sidebar-hover-bg-color: $primary;
   background-color: $sidebar-bg-color;
   border-bottom: 2px solid $btn-background;
   margin-top: 50px;
-  height: 30%;
+  height: 100%;
   width: 236px;
   overflow-y: hidden;
   transition: 0.4s;
 }
-
-
 .sidebar-item {
   cursor: pointer;
   margin-left:20px;

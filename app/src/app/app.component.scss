@@ -1,8 +1,9 @@
+@import '../variables.scss';
 .app {
-  height: 93vh;
+  height: 50vh;
   display: flex;
   flex: 1 1;
-
+  background-color: $primary;
 }
 
 .page {
