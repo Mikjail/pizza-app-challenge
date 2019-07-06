@@ -1,0 +1,49 @@
+@import '../../../styles.scss';
+.dashboard {
+    padding: 40px;
+    height: auto;
+    background-color: white;
+    .dashboard-top{
+        &__left{
+            &--divider{
+                border-right: 1px solid gray;
+            }
+            &__header{
+                text-align: center;
+                &__title{
+                    margin-bottom: 25px;
+                    color:$dark-text;
+                }
+            }
+            &__pie-progress{
+                display: flex;
+                &__delivered,
+                &__pending{
+                    text-align: center;
+                    font-size: 12px;
+                    color: gray;
+                }
+            }
+        }
+        &__right{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__title{
+                color:$dark-text;
+            }
+            &__currency{
+                font-size: 12px;
+                color: gray;
+                margin-bottom: 10px;
+                display: block;
+            }
+            &__amount{
+                color:$dark-text;
+            }
+        }
+    }
+   
+  }
+  
