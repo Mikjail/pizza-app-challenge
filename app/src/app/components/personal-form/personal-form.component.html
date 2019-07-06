@@ -1,5 +1,5 @@
 <div class="personal-detail">
-  <h3 class="personal-detail__header">Pizza Order</h3>
+  <h4 class="personal-detail__header">PIZZA ORDER</h4>
   <h5 class="personal-detail__subheader"> Basic Information </h5>
   <hr>
   <form (ngSubmit)="onSubmit($event)" [formGroup]="parentForm">
@@ -13,7 +13,7 @@
             Field is required
           </span>
         </label>
-        <input class="form-control" formControlName="name" type="text" placeholder="John Smith">
+        <input class="form-control" formControlName="name" type="text" placeholder="Name">
       </div>
       <div class="form-group col-sm-6">
         <label>
@@ -23,7 +23,7 @@
             Field is required
           </span>
         </label>
-        <input class="form-control" formControlName="email" type="email" placeholder="Enter your email">
+        <input class="form-control" formControlName="email" type="email" placeholder="Email">
       </div>
       <div class="form-group col-sm-6">
         <label>
@@ -39,7 +39,7 @@
             </span>
           </span>
         </label>
-        <input class="form-control" formControlName="address" type="text" placeholder="44 Pizza Street">
+        <input class="form-control" formControlName="address" type="text" placeholder="Address">
       </div>
       <div class="form-group col-sm-6">
         <label>
@@ -49,7 +49,7 @@
             Field is required
           </span>
         </label>
-        <input class="form-control" formControlName="phone" type="text" placeholder="01234 567 890">
+        <input class="form-control" formControlName="phone" type="text" placeholder="Contact Number">
       </div>
     </div>
   </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Orders } from 'src/app/models/Orders';
 import _ from 'lodash';
 
@@ -11,30 +11,48 @@ export class StatusOrdersComponent implements OnInit {
   @Input()
   orders: Orders[];
 
+  @Output()
+  changeStatus =  new EventEmitter<any>();
+
   totalItems: number;
 
-  completedWidth: string;
-  pendingWidth: string;
-  cancelledWidth: string;
-  countCompleted: number;
-  countPending: number;
-  countCancelled: number;
+  status = {
+    CANCEL: 'cencelled',
+    ACCEPT: 'accepted',
+    COMPLETE: 'completed',
+    PENDING: 'pending',
+    IN_TRANSIT: 'in-transit'
+  };
+
+  countStatus = {
+    completed: 0,
+    status: 0,
+    pending: 0,
+    cancelled: 0,
+    'in-transit': 0,
+    accepted: 0
+  };
 
   constructor() { }
 
   ngOnInit() {
     this.totalItems = this.orders.length;
-    this.statusBarCalculator();
   }
 
-  statusBarCalculator() {
-    this.countCompleted = this.howManyMatch('completed');
-    this.countPending = this.howManyMatch('pending');
-    this.countCancelled = this.howManyMatch('cancelled');
+  changeOrderStatus(index, status) {
+    this.changeStatus.emit({ id: index, status});
+  }
 
-    this.completedWidth = this.calculateTotalPercent(this.countCompleted);
-    this.pendingWidth = this.calculateTotalPercent(this.countPending);
-    this.cancelledWidth = this.calculateTotalPercent(this.countCancelled);
+  statusBarCalculator(status) {
+    if (status === this.status.PENDING ) {
+      this.countStatus[this.status.ACCEPT] = this.howManyMatch(this.status.ACCEPT);
+      this.countStatus[status] = this.howManyMatch(status);
+      const pendingPercent =  this.calculateTotalPercent(this.countStatus[status] + this.countStatus[this.status.ACCEPT] );
+      return pendingPercent;
+    }
+    this.countStatus[status] = this.howManyMatch(status);
+    const percent =  this.calculateTotalPercent(this.countStatus[status]);
+    return percent;
   }
 
   calculateTotalPercent(value) {
@@ -50,5 +68,7 @@ export class StatusOrdersComponent implements OnInit {
     }
     return 0;
   }
+
+
 
 }

@@ -4,6 +4,20 @@
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  &__header{
+   font-size: 12px; 
+  }
+  
+  &__count-items{
+     &--color{
+       color: $pending-status;
+     }
+     &--text-font{
+       margin-left: 5px;
+       font-size: 11px;
+       color: gray;
+     }
+  }
 
   &__bar {
     display: flex;
@@ -30,7 +44,7 @@
   }
 
   &__details {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     &__completed,
     &__cancelled,
@@ -62,9 +76,10 @@
       margin-left: 10px;
 
       >label {
-        font-size: 13px;
+        font-size: 12px;
         display: block;
         margin-bottom: 0px;
+        height: 11px;
       }
 
       span {
@@ -90,6 +105,7 @@
     th {
       border: 1px solid #ddd;
       padding: 8px;
+      font-size: 11px;
     }
 
     tr:nth-child(even) {
@@ -103,6 +119,7 @@
       background-color: #f7f8f9;
       font-weight: 500;
       color: gray;
+      
     }
 
     &__action {

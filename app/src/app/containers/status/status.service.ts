@@ -10,4 +10,8 @@ export class StatusService {
     getOrders() {
        return this.http.get(`/api/getOrders`);
     }
+
+    setStatus(item) {
+        return this.http.post('/api/setStatus', item);
+    }
 }

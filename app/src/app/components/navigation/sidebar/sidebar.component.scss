@@ -23,7 +23,7 @@ $sidebar-hover-bg-color: $primary;
   height: 50px;
   overflow: hidden;
   a {
-    text-decoration: none;
+    cursor: pointer;
     color: $sidebar-font-color;
   }
 
@@ -34,7 +34,8 @@ $sidebar-hover-bg-color: $primary;
   }
 
   &.active {
-    background-color: $sidebar-hover-bg-color;
+    background-color: red ;
+    border-left:1px solid white;
   }
 
   &.no-hover:hover {

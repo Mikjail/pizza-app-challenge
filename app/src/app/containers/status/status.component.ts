@@ -23,9 +23,20 @@ export class StatusComponent implements OnInit {
         this.orders = response.orders as Orders[];
       },
       error => {
-
+        console.log(error);
       }
     );
   }
+
+changeStatus(item) {
+   this.statusService.setStatus(item).subscribe(
+     (response: any ) => {
+        this.orders = response.orders as Orders[];
+     },
+     error => {
+      console.log(error);
+     }
+   );
+ }
 
 }

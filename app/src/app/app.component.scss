@@ -1,13 +1,13 @@
 .app {
-  height: 93%;
+  height: 93vh;
   display: flex;
   flex: 1 1;
 
 }
 
 .page {
-  width: 96%;
-  background-color: white;
+  width: 100%;
+  height: auto;
   flex-flow: column wrap;
   transition: 0.4s;
   margin-right: 5%;

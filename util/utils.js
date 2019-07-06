@@ -14,10 +14,11 @@ const calculatePrice = (items, prices) => {
     return total.toFixed(2);
 }
 
-const getData = async (file) =>{
+const getData = (file) =>{
     return new Promise((resolve, reject) =>{
-        fs.readFile(`./data/${file}.json`, 'utf8', (err, response) => {
-           try {
+        try {
+            fs.readFile(`./data/${file}.json`, 'utf8', (err, response) => {
+            
                 if (err) {
                     const error = errorHandler(err);
                     resolve(error)
@@ -29,16 +30,41 @@ const getData = async (file) =>{
                     
                     resolve(newData);
                 }
-           } catch (error) {
-                const err = errorHandler(error)
-                resolve(err);
-           }
-           
+            
+            
+            });
+        } catch (error) {
+            const err = errorHandler(error)
+            resolve(err);
+        }
+    });
+}
+
+const createData = (file, jsonString)=>{
+    return new Promise((resolve, reject) =>{
+        fs.writeFile(`./data/${file}.json`, jsonString, err => {
+            if (err) {
+                const error = errorHandler(err);
+                resolve(error);
+            } else {
+               resolve({status: 200, message: 'Success!'});
+            }
         });
     });
+}
+
+const editData = (item, jsonList, property) => {
+    jsonList.forEach(element=>{
+        if(element.id == item.id){
+            element[property] = item[property];
+        }
+    })
+    return jsonList
 }
 
 module.exports ={
     calculatePrice,
     getData,
+    createData,
+    editData
 } 

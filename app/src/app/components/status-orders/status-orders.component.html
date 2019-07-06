@@ -1,13 +1,14 @@
 <div class="row">
   <div class="col-sm-8">
-    <label>Total item in inventory</label>
-    <div class="">
-      {{totalItems}} items
-    </div>
+    <label class="order-status__header">Total item in inventory</label>
+    <div class="order-status__count-items">
+      <span class="order-status__count-items--color">{{totalItems}}</span> 
+      <span class="order-status__count-items--text-font">items</span>
+    </div> 
     <div class="order-status__bar">
-      <div class="order-status__bar__completed" [style.width.%]="completedWidth"></div>
-      <div class="order-status__bar__pending" [style.width.%]="pendingWidth"></div>
-      <div class="order-status__bar__cancelled" [style.width.%]="cancelledWidth"></div>
+      <div class="order-status__bar__completed" [style.width.%]="statusBarCalculator(status.COMPLETE)"></div>
+      <div class="order-status__bar__pending" [style.width.%]="statusBarCalculator(status.PENDING)"></div>
+      <div class="order-status__bar__cancelled" [style.width.%]="statusBarCalculator(status.CANCEL)"></div>
     </div>
   </div>
 </div>
@@ -18,21 +19,21 @@
     <div class="order-status__details__completed__circle"></div>
     <div class="order-status__details__completed__detail">
       <label>Completed</label>
-      <span>{{countCompleted}}</span>
+      <span>{{countStatus[status.COMPLETE]}}</span>
     </div>
   </div>
   <div class="col-sm-2 order-status__details__pending">
     <div class="order-status__details__pending__circle"></div>
     <div class="order-status__details__pending__detail">
       <label>Pending</label>
-      <span>{{countPending}}</span>
+      <span>{{countStatus[status.PENDING] + countStatus[status.ACCEPT] }}</span>
     </div>
   </div>
   <div class="col-sm-2 order-status__details__cancelled">
     <div class="order-status__details__cancelled__circle"></div>
     <div class="order-status__details__cancelled__detail">
       <label>Cancelled</label>
-      <span>{{countCancelled}}</span>
+      <span>{{countStatus[status.CANCEL]}}</span>
     </div>
   </div>
 
@@ -67,20 +68,20 @@
             {{orderDetails.createdAt | amTimeAgo}}
           </td>
           <td>
-            <span class="order-status__table__action--direction" *ngIf="orderDetails.status ==='pending'">
-              <a class=" order-status__table__action__accept" href="#">
+            <span class="order-status__table__action--direction" *ngIf="orderDetails.status === status.PENDING">
+              <a (click)="$event.preventDefault(); changeOrderStatus(orderDetails.id, status.ACCEPT)" href="#" class="order-status__table__action__accept" href="javascript(void);" >
                 Accept
               </a>
-              <a class="order-status__table__action__cancel" href="#">
+              <a (click)="$event.preventDefault(); changeOrderStatus(orderDetails.id, status.CANCEL)" href="#" class="order-status__table__action__cancel" href="javascript(void);" >
                 Cancel
               </a>
             </span>
-            <span class="order-status__table__action" *ngIf="orderDetails.status !== 'pending'">
+            <span class="order-status__table__action" *ngIf="orderDetails.status !== status.PENDING">
               <span class="order-status__table__action__title">
                 {{orderDetails.status}}
               </span>
-              <a href="#" class="order-status__table__action__completed"
-                *ngIf="orderDetails.status === 'accepted' || orderDetails.status === 'in-transit'">
+              <a (click)="$event.preventDefault(); changeOrderStatus(orderDetails.id, status.COMPLETE)" href="#" class="order-status__table__action__completed"
+                *ngIf="orderDetails.status === status.ACCEPT|| orderDetails.status === status.IN_TRANSIT">
                 Mark as completed
               </a>
             </span>

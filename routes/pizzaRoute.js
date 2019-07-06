@@ -9,4 +9,6 @@ module.exports = app => {
     app.post('/api/submitOrder', OrderController.setOrder);   
 
     app.get('/api/getOrders', OrderController.getOrders); 
+
+    app.post('/api/setStatus',OrderController.setStatus)
 }
