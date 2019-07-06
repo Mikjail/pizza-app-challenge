@@ -14,4 +14,8 @@ export class PizzaService {
     updateSummary(items) {
         return this.http.post('/api/pizzaSummary', items);
     }
+
+    submitOrder(items) {
+        return this.http.post('/api/submitOrder', items);
+    }
 }

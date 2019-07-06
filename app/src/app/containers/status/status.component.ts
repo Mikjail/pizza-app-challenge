@@ -1,4 +1,6 @@
+import { Orders } from './../../models/Orders';
 import { Component, OnInit } from '@angular/core';
+import { StatusService } from './status.service';
 
 @Component({
   selector: 'app-status',
@@ -7,58 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
 
-  orders= [{
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'pending'
-  },
-  {
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'accepted'
-  },
-  {
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'in-transit'
-  },
-  {
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'cancelled'
-  },
-  {
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'cancelled'
-  },
-  {
-    id: '1',
-    address: 'street 123, UAE SHARJAH',
-    name: 'nombre',
-    phone: 123432,
-    createdAt: '10/12/2019 10:30',
-    status: 'completed'
-  }];
+  orders: any;
 
-  constructor() { }
+  constructor(private statusService: StatusService) { }
 
   ngOnInit() {
+    this.getOrders();
+  }
+
+  getOrders() {
+    this.statusService.getOrders().subscribe(
+     (response: any) => {
+        this.orders = response.orders as Orders[];
+      },
+      error => {
+
+      }
+    );
   }
 
 }

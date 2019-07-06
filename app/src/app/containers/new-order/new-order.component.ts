@@ -14,17 +14,7 @@ export class NewOrderComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private pizzaService: PizzaService) { }
 
-  myForm = this.fb.group({
-    details: this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      address: ['', Validators.required],
-      phone: ['', Validators.required],
-    }, { validator: PizzaValidators.checkEmailsMatch }),
-    pizzas: this.fb.array([
-      this.createPizza()
-    ])
-  });
+  myForm: FormGroup;
 
   pizzaInfo: PizzaInfo;
 
@@ -32,7 +22,38 @@ export class NewOrderComponent implements OnInit {
 
   ngOnInit() {
     this.getPizzaDetails();
-    this.getPrices([{size: 'large', toppings: []}]);
+    this.initForm();
+  }
+
+  initForm(){
+    this.myForm = this.fb.group({
+      details: this.fb.group({
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        address: ['', Validators.required],
+        phone: ['', Validators.required],
+      }, { validator: PizzaValidators.checkEmailsMatch }),
+      pizzas: this.fb.array([
+        this.createPizza()
+      ])
+    });
+
+    this.updateSummary();
+  }
+  submitOrder() {
+    const personalDetails = this.myForm.get('details').value;
+    const order = this.myForm.get('pizzas').value;
+
+    this.pizzaService.submitOrder({ personalDetails, order}).subscribe(
+      response => {
+        alert("your order has been sent!");
+        this.myForm.reset();
+        this.initForm();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getPizzaDetails() {
@@ -72,7 +93,7 @@ export class NewOrderComponent implements OnInit {
   createPizza() {
     return this.fb.group({
       size: ['large', Validators.required],
-      toppings: []
+      toppings: ['', ]
     });
   }
 
@@ -84,6 +105,7 @@ export class NewOrderComponent implements OnInit {
   addPizza() {
     const control = this.myForm.get('pizzas') as FormArray;
     control.push(this.createPizza());
+    this.updateSummary();
   }
 
   /**
@@ -95,6 +117,7 @@ export class NewOrderComponent implements OnInit {
   removePizza(index: number) {
     const control = this.myForm.get('pizzas') as FormArray;
     control.removeAt(index);
+    this.updateSummary();
   }
 
   /**

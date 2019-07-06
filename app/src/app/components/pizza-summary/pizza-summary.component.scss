@@ -4,7 +4,7 @@
         display:flex;
         width:100%;
     }
-
+    
     &__size{
         &__name{
             width:20%;
@@ -32,5 +32,9 @@
             width:20%;
             text-align:right;
         }
+    }
+
+    &__price{
+        text-align: right;
     }
 }

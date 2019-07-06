@@ -5,5 +5,7 @@ module.exports = app => {
 
     app.post('/api/pizzaSummary', PizzaController.getSummary);
 
-    // app.post('/api/placeOrder', PizzaController.setOrder);   
+    app.post('/api/submitOrder', PizzaController.setOrder);   
+
+    app.get('/api/getOrders', PizzaController.getOrders); 
 }

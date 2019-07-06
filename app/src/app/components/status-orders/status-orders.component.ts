@@ -28,7 +28,6 @@ export class StatusOrdersComponent implements OnInit {
   }
 
   statusBarCalculator() {
-    console.log(this.orders);
     this.countCompleted = this.howManyMatch('completed');
     this.countPending = this.howManyMatch('pending');
     this.countCancelled = this.howManyMatch('cancelled');
@@ -36,7 +35,6 @@ export class StatusOrdersComponent implements OnInit {
     this.completedWidth = this.calculateTotalPercent(this.countCompleted);
     this.pendingWidth = this.calculateTotalPercent(this.countPending);
     this.cancelledWidth = this.calculateTotalPercent(this.countCancelled);
-    console.log(this.completedWidth);
   }
 
   calculateTotalPercent(value) {
@@ -44,8 +42,8 @@ export class StatusOrdersComponent implements OnInit {
   }
 
   howManyMatch(status) {
-    const count = _.groupBy(this.orders, (order) => {
-      return order.status === status;
+    const count = _.groupBy(this.orders, (orderDetail) => {
+      return orderDetail.order.status === status;
     });
     if (count.true) {
       return count.true.length;

@@ -4,8 +4,8 @@ import { NewOrderComponent } from './containers/new-order/new-order.component';
 import { StatusComponent } from './containers/status/status.component';
 
 const routes: Routes = [
-  { path: '', component: StatusComponent },
-  { path: 'newOrder', component: NewOrderComponent }
+  { path: '', component: NewOrderComponent },
+  { path: 'status', component: StatusComponent }
 ];
 
 @NgModule({

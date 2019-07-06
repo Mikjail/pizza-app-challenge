@@ -12,9 +12,15 @@
       background-color: $header-collapse;
       padding: 7px 15px;
 
+      &__remove-btn{
+        margin-right:15px;
+        color:white;
+        font-size: 12px;
+      }
 
       h5 {
         display: inline-block;
+        padding-top: 2px;
         margin: 0px;
       }
     }

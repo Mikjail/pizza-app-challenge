@@ -14,7 +14,7 @@
       </div>
 
       <div class="pizza-summary__size__price">
-        {{prices.size[pizza.size]}}
+        {{prices.size[pizza.size] | currency }}
       </div>
     </div>
     <div class="pizza-summary__toppings" *ngFor="let topping of pizza.toppings">
@@ -22,7 +22,7 @@
         {{topping | titlecase}}
       </div>
       <div class="pizza-summary__toppings__price">
-        {{prices.toppings[topping]}}
+        {{prices.toppings[topping] | currency}}
       </div>
 
     </div>
@@ -30,12 +30,14 @@
 </div>
 <hr>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-8">
     <div class="pizza-summary__total">
       <h5>TOTAL</h5>
     </div>
+  </div>
+  <div class="col-sm-4">
     <div class="pizza-summary__price">
-      <h5>{{prices.total}}</h5>
+      <h5>{{prices.total | currency}}</h5>
     </div>
   </div>
 </div>

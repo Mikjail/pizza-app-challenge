@@ -3,13 +3,25 @@
   <app-personal-form [parentForm]="myForm">
   </app-personal-form>
 
-  <app-pizza-form (add)="addPizza()" (submitOrder)="createOrder($event)" [pizzasForm]="myForm.get('pizzas')"
-    (updateSummary)="updateSummary()" [pizzaInfo]="pizzaInfo">
+  <app-pizza-form
+    (add)="addPizza()" 
+    (remove)="removePizza($event)"
+    (submitOrder)="createOrder($event)" 
+    (updateSummary)="updateSummary()" 
+    [pizzasForm]="myForm.get('pizzas')"
+    [pizzaInfo]="pizzaInfo">
   </app-pizza-form>
 
   <ng-container *ngIf="prices">
     <app-pizza-summary [pizzasForm]="myForm.get('pizzas')" [prices]="prices">
     </app-pizza-summary>
   </ng-container>
+  
+  <div class="new-order__submit-btn row">
+      <div class="col-sm-12">
+          <button class="btn btn-outline-primary btn-sm float-right" (click)="submitOrder()"> Place Order</button>
+      </div>
+  </div>
+  
 
 </div>

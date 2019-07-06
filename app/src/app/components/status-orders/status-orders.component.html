@@ -56,18 +56,18 @@
         </th>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
+        <tr *ngFor="let orderDetails of orders">
           <td>
-            {{order.id}}
+            {{orderDetails.id}}
           </td>
           <td>
-            {{order.address}}
+            {{orderDetails.personalDetails.address}}
           </td>
           <td>
-            {{order.createdAt}}
+            {{orderDetails.createdAt}}
           </td>
           <td>
-            <span class="order-status__table__action--direction" *ngIf="order.status ==='pending'">
+            <span class="order-status__table__action--direction" *ngIf="orderDetails.status ==='pending'">
               <a class=" order-status__table__action__accept" href="#">
                 Accept
               </a>
@@ -75,12 +75,12 @@
                 Cancel
               </a>
             </span>
-            <span class="order-status__table__action" *ngIf="order.status !== 'pending'">
+            <span class="order-status__table__action" *ngIf="orderDetails.status !== 'pending'">
               <span class="order-status__table__action__title">
-                {{order.status}}
+                {{orderDetails.status}}
               </span>
               <a href="#" class="order-status__table__action__completed"
-                *ngIf="order.status === 'accepted' || order.status === 'in-transit'">
+                *ngIf="orderDetails.status === 'accepted' || orderDetails.status === 'in-transit'">
                 Mark as completed
               </a>
             </span>

@@ -25,6 +25,9 @@ export class PizzaFormComponent implements OnInit {
   @Output()
   updateSummary = new EventEmitter<any>();
 
+  @Output()
+  remove = new EventEmitter<any>();
+
   toppings = [
     'bacon', 'pepperoni', 'mushroom', 'olive', 'basil', 'sweetcorn',
     'onion', 'tomato'];
@@ -43,7 +46,11 @@ export class PizzaFormComponent implements OnInit {
 
   addPizza() {
     this.add.emit();
-    this.isCollapsed[this.toppingsSelected.length - 1] = true;
+  }
+
+  removePizza(index) {
+    this.remove.emit(index);
+    this.toppingsSelected.splice(index, 1);
   }
 
   onSubmit() {
