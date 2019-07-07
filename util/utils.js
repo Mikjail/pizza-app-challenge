@@ -22,7 +22,9 @@ const calculateTotalOrders = (orderJson) =>{
         const completed = _.sumBy(orderJson, ({status})=> (status == 'completed'))
         const pendings= _.sumBy(orderJson, ({status})=> (status == 'pending'))
         const totalSales = _.sumBy(orderJson,({total})=> parseInt(total));
-        const grouByTime = _.groupBy(orderJson, "localTime");
+        const grouByTime = _.groupBy(orderJson,'localTime');
+        _.sortBy(grouByTime, ['loalTime']);
+        
         const timeAndOrders ={
             time:[],
             orders:[]
@@ -43,7 +45,7 @@ const calculateTotalOrders = (orderJson) =>{
         
     } catch (err) {
         const error =errorHandler(err);
-        res.send(error)
+        return error;
     }
 }
 
