@@ -33,7 +33,7 @@ export class NewOrderComponent implements OnInit {
         name: ['', Validators.required],
         email: [''],
         address: ['', Validators.required],
-        phone: [''],
+        phone: ['', Validators.required],
       }, { validator: PizzaValidators.checkEmailsMatch }),
       pizzas: this.fb.array([
         this.createPizza()
