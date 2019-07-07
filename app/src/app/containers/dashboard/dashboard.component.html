@@ -9,7 +9,7 @@
         <div class="dashboard-top__left__pie-progress">
             <div class="dashboard-top__left__pie-progress__delivered">
                 <circle-progress
-                    [percent]="85"
+                    [percent]="reports.completed"
                     [radius]="80"
                     [outerStrokeWidth]="10"
                     [innerStrokeWidth]="8"
@@ -23,7 +23,7 @@
             
             <div class="dashboard-top__left__pie-progress__pending">
                 <circle-progress
-                    [percent]="85"
+                    [percent]="reports.pending"
                     [radius]="80"
                     [outerStrokeWidth]="10"
                     [innerStrokeWidth]="8"
@@ -40,7 +40,7 @@
         <div class="dashboard-top__right__sales">
             <h4 class="dashboard-top__right__title">TOTAL SALES</h4>
             <span class="dashboard-top__right__currency">USD</span>
-            <h1 class="dashboard-top__right__amount">1234</h1>
+            <h1 class="dashboard-top__right__amount">{{reports.totalSales}}</h1>
         </div>
     </div>
     
@@ -77,9 +77,6 @@
                         </div>
                 </div>
             </div>
-           
-           
-            
         </div>
     </div>
    

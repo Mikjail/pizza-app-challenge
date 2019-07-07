@@ -11,6 +11,13 @@ ORDER_STATUS={
 
  class OrderController {
    
+    /**
+     * This will get all orders 
+     * from [./data/orders.json]
+     * @param {*} req
+     * @param {*} res
+     * @memberof OrderController
+     */
     async getOrders(req,res){
         try {
             const orderJson = await getData('orders');
@@ -24,6 +31,13 @@ ORDER_STATUS={
         
     }
 
+    /**
+     * this will update the orders 
+     * inside [data/orders.json]
+     * @param {*} req
+     * @param {*} res
+     * @memberof OrderController
+     */
     async setOrder(req, res){
         try {
             const details = req.body;
@@ -39,6 +53,8 @@ ORDER_STATUS={
             details.status='pending';
     
             details.createdAt= moment();
+
+            details.localTime = moment().format("HH:mm A");
     
             if(!orderJson.orders){
                 orderJson.orders=[];
@@ -57,6 +73,13 @@ ORDER_STATUS={
        
     }
 
+   /**
+    * This will update the status of
+    * an specific order setted in [./data/orders.json]
+    * @param {*} req
+    * @param {*} res
+    * @memberof OrderController
+    */
    async setStatus(req, res) {
         try {
             const order = req.body;

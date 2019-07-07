@@ -53,10 +53,6 @@ export class PizzaFormComponent implements OnInit {
     this.toppingsSelected.splice(index, 1);
   }
 
-  onSubmit() {
-    this.submitOrder.emit(this.pizzasForm);
-  }
-
   updateSize(size: string, i) {
       this.updateSummary.emit();
   }

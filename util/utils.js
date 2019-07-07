@@ -1,5 +1,7 @@
 const errorHandler = require('./errorHandler');
 const fs = require('fs');
+const moment = require('moment');
+const _ = require('lodash');
 
 const calculatePrice = (items, prices) => {
     let total=0;
@@ -14,6 +16,43 @@ const calculatePrice = (items, prices) => {
     return total.toFixed(2);
 }
 
+const calculateTotalOrders = (orderJson) =>{
+    try {
+        
+        const completed = _.sumBy(orderJson, ({status})=> (status == 'completed'))
+        const pendings= _.sumBy(orderJson, ({status})=> (status == 'pending'))
+        const totalSales = _.sumBy(orderJson,({total})=> parseInt(total));
+        const grouByTime = _.groupBy(orderJson, "localTime");
+        const timeAndOrders ={
+            time:[],
+            orders:[]
+        }
+
+        Object.keys(grouByTime).forEach(key=>{
+            timeAndOrders.time.push(key);
+            timeAndOrders.orders.push(grouByTime[key].length);
+        })
+        
+        return {
+            completed,
+            pendings,
+            totalSales,
+            timeAndOrders
+        }
+
+        
+    } catch (err) {
+        const error =errorHandler(err);
+        res.send(error)
+    }
+}
+
+/**
+ * Will take a file name and 
+ * will gete the data from [./data] folder
+ * @param {*} file
+ * @returns
+ */
 const getData = (file) =>{
     return new Promise((resolve, reject) =>{
         try {
@@ -40,6 +79,13 @@ const getData = (file) =>{
     });
 }
 
+/**
+ * This will write in any 
+ * json file inside [./data] 
+ * @param {*} file
+ * @param {*} jsonString
+ * @returns
+ */
 const createData = (file, jsonString)=>{
     return new Promise((resolve, reject) =>{
         fs.writeFile(`./data/${file}.json`, jsonString, err => {
@@ -53,6 +99,14 @@ const createData = (file, jsonString)=>{
     });
 }
 
+/**
+ * This will edit a data depending of 
+ * the parameter sent.
+ * @param {*} item
+ * @param {*} jsonList
+ * @param {*} property
+ * @returns
+ */
 const editData = (item, jsonList, property) => {
     jsonList.forEach(element=>{
         if(element.id == item.id){
@@ -63,6 +117,7 @@ const editData = (item, jsonList, property) => {
 }
 
 module.exports ={
+    calculateTotalOrders,
     calculatePrice,
     getData,
     createData,

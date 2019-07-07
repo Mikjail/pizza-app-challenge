@@ -10,5 +10,4 @@ export class DashboardService {
     getReport() {
         return this.http.get(`/api/getReport`);
      }
- 
 }

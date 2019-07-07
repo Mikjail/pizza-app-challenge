@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { Chart } from 'chart.js';
+import { Report } from 'src/app/models/Report';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,21 +11,24 @@ import { Chart } from 'chart.js';
 export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart', { static: false }) private chartRef;
   chart: any;
+
+  reports: Report = {};
+
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    // this.getOrders();
+    this.getOrders();
   }
-  ngAfterViewInit() { 
 
+  createReport() {
     const ctx = this.chartRef.nativeElement.getContext('2d');
     setTimeout(() => {
       this.chart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['8am', '11am', '1pm', '4pm', '7pm', '10pm'],
+          labels: this.reports.timeAndOrders.time,
           datasets: [{
-            data: [10, 20, 3, 40, 4, 10],
+            data: this.reports.timeAndOrders.orders,
             label: 'Orders',
             borderColor: '#f88930',
             backgroundColor: 'rgba(254, 252, 247, 0.3)',
@@ -50,8 +54,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getOrders() {
     this.dashboardService.getReport().subscribe(
-      response => {
-        console.log(response);
+      (response: Report ) => {
+        this.reports = response;
+        this.createReport();
       },
       error => {
         console.log(error);
