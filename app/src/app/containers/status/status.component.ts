@@ -23,7 +23,7 @@ export class StatusComponent implements OnInit {
         this.orders = response.orders as Orders[];
       },
       error => {
-        console.log(error);
+      this.orders=[];
       }
     );
   }
@@ -34,7 +34,7 @@ changeStatus(item) {
         this.orders = response.orders as Orders[];
      },
      error => {
-      console.log(error);
+      this.orders=[];
      }
    );
  }

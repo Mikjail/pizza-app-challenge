@@ -20,9 +20,15 @@ export class DashboardComponent implements OnInit {
     this.getOrders();
   }
 
+  /**
+   * This will create the line chart
+   *
+   * @memberof DashboardComponent
+   */
   createReport() {
     const ctx = this.chartRef.nativeElement.getContext('2d');
     setTimeout(() => {
+      Chart.defaults.global.defaultFontSize = '18';
       this.chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -37,6 +43,7 @@ export class DashboardComponent implements OnInit {
         },
         options: {
           legend: {
+            defaultFontSize:14,
             display: false
           },
           scales: {
@@ -52,6 +59,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * This will get all orders from
+   * API
+   * @memberof DashboardComponent
+   */
   getOrders() {
     this.dashboardService.getReport().subscribe(
       (response: Report ) => {

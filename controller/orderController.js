@@ -2,12 +2,7 @@ const fs = require('fs');
 const moment = require('moment');
 const errorHandler = require('../util/errorHandler');
 const {calculatePrice, getData, editData, createData} = require('../util/utils')
-
-ORDER_STATUS={
-    PENDING:'pending',
-    COMPLETED: 'completed',
-    IN_TRANSIT: 'in-transit'
-}
+const { ORDER_STATUS} = require('../util/constant');
 
  class OrderController {
    
@@ -50,11 +45,11 @@ ORDER_STATUS={
     
             details.total=total
     
-            details.status='pending';
+            details.status=ORDER_STATUS.PENDING;
     
             details.createdAt= moment();
 
-            details.localTime = moment().format("HH:mm A");
+            details.localTime = moment().format("HH A");
     
             if(!orderJson.orders){
                 orderJson.orders=[];

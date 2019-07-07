@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(cors());
 require('./routes/pizzaRoute')(app);
 
-// if(process.env.NODE_ENV === 'prod'){
+if(process.env.NODE_ENV === 'prod'){
     // 1. Express will serve up prod assets like main.css and main.js
     app.use(express.static('app/dist/pizza-challenge'));
    
@@ -16,7 +16,7 @@ require('./routes/pizzaRoute')(app);
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'app', 'dist', 'index.html'));
     })
-// }
+}
 
 const PORT = process.env.PORT || 5000;
 

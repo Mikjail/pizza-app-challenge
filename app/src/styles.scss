@@ -9,7 +9,12 @@ body {
   p,h1,h2,h3,h4,h5,label{
     color:#494949;
   }
+
   .error{
     color: $warning-text;
+  }
+  
+  .container{
+    max-width: 100%;
   }
 }

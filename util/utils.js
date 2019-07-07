@@ -1,5 +1,6 @@
 const errorHandler = require('./errorHandler');
 const fs = require('fs');
+const { ORDER_STATUS} = require('../util/constant');
 const moment = require('moment');
 const _ = require('lodash');
 
@@ -19,9 +20,9 @@ const calculatePrice = (items, prices) => {
 const calculateTotalOrders = (orderJson) =>{
     try {
         
-        const completed = _.sumBy(orderJson, ({status})=> (status == 'completed'))
-        const pendings= _.sumBy(orderJson, ({status})=> (status == 'pending'))
-        const totalSales = _.sumBy(orderJson,({total})=> parseInt(total));
+        const completed = _.sumBy(orderJson, ({status})=> (status == ORDER_STATUS.COMPLETED ))
+        const pendings= _.sumBy(orderJson, ({status})=> (status == ORDER_STATUS.PENDING || status== ORDER_STATUS.ACCEPTED));
+        const totalSales = _.sumBy(orderJson,({status,total})=> status == ORDER_STATUS.COMPLETED ? parseFloat(total): 0).toFixed(2);
         const grouByTime = _.groupBy(orderJson,'localTime');
         _.sortBy(grouByTime, ['loalTime']);
         

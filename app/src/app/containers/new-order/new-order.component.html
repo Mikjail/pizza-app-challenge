@@ -8,6 +8,7 @@
     (remove)="removePizza($event)"
     (submitOrder)="createOrder($event)" 
     (updateSummary)="updateSummary()" 
+    [toppingsSelected]="toppingsSelected" 
     [pizzasForm]="myForm.get('pizzas')"
     [pizzaInfo]="pizzaInfo">
   </app-pizza-form>

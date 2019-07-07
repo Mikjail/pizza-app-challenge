@@ -20,6 +20,8 @@ export class NewOrderComponent implements OnInit {
 
   prices: Prices;
 
+  toppingsSelected:string[] =[];
+
   ngOnInit() {
     this.getPizzaDetails();
     this.initForm();
@@ -40,6 +42,12 @@ export class NewOrderComponent implements OnInit {
 
     this.updateSummary();
   }
+
+  /* This will submit the order filled 
+   *
+   *
+   * @memberof NewOrderComponent
+   */
   submitOrder() {
     const personalDetails = this.myForm.get('details').value;
     const order = this.myForm.get('pizzas').value;
@@ -48,6 +56,7 @@ export class NewOrderComponent implements OnInit {
         response => {
           alert("your order has been sent!");
           this.myForm.reset();
+          this.toppingsSelected=[];
           this.initForm();
         },
         error => {
@@ -59,16 +68,29 @@ export class NewOrderComponent implements OnInit {
     }
   }
 
-validateAllFormFields(formGroup: FormGroup) {
-  Object.keys(formGroup.controls).forEach(field => {
-    const control = formGroup.get(field);
-    if (control instanceof FormControl) {
-      control.markAsTouched({ onlySelf: true });
-    } else if (control instanceof FormGroup) {
-      this.validateAllFormFields(control);
-    }
-  });
-}
+  /**
+   * This will trigger validations
+   *
+   * @param {FormGroup} formGroup
+   * @memberof NewOrderComponent
+   */
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
+
+  /**
+   * This will get Pizza details from API
+   *
+   * @memberof NewOrderComponent
+   */
   getPizzaDetails() {
     this.pizzaService.getPizzaDetails().subscribe(
      (response: BasePizzaInfo) => {

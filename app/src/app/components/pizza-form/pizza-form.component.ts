@@ -15,7 +15,10 @@ export class PizzaFormComponent implements OnInit {
 
   @Input()
   pizzaInfo: PizzaInfo;
-
+  
+  @Input()
+  toppingsSelected;
+  
   @Output()
   add = new EventEmitter<any>();
 
@@ -32,7 +35,6 @@ export class PizzaFormComponent implements OnInit {
     'bacon', 'pepperoni', 'mushroom', 'olive', 'basil', 'sweetcorn',
     'onion', 'tomato'];
 
-  toppingsSelected = [];
 
   selection = [];
 
