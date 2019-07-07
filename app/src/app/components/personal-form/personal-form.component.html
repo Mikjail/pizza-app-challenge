@@ -6,7 +6,7 @@
     <div class="row" formGroupName="details">
       <div class="form-group col-sm-6">
         <label>
-          Name
+          Name*
           <span
             *ngIf="parentForm.get('details').get('name').hasError('required') && parentForm.get('details').get('name').touched"
             class="error">
@@ -17,7 +17,7 @@
       </div>
       <div class="form-group col-sm-6">
         <label>
-          Email
+          Email*
           <span *ngIf="parentForm.get('details').get('email').errors && parentForm.get('details').get('email').touched"
             class="error">
             Field is required

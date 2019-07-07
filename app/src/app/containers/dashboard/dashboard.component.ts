@@ -8,11 +8,11 @@ import { Report } from 'src/app/models/Report';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
   @ViewChild('lineChart', { static: false }) private chartRef;
   chart: any;
 
-  reports: Report = {};
+  reports: any = {};
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -61,6 +61,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       error => {
         console.log(error);
       }
-    )
+    );
   }
 }

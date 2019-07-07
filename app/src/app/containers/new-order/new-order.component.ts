@@ -2,7 +2,7 @@ import { Prices } from 'src/app/models/PizzaInfo';
 import { PizzaInfo, BasePizzaInfo } from './../../models/PizzaInfo';
 import { PizzaService } from './new-order.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { PizzaValidators } from '../../validators/pizza.validator';
 
 @Component({
@@ -25,13 +25,13 @@ export class NewOrderComponent implements OnInit {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.myForm = this.fb.group({
       details: this.fb.group({
         name: ['', Validators.required],
-        email: ['', Validators.required],
+        email: [''],
         address: ['', Validators.required],
-        phone: ['', Validators.required],
+        phone: [''],
       }, { validator: PizzaValidators.checkEmailsMatch }),
       pizzas: this.fb.array([
         this.createPizza()
@@ -43,19 +43,32 @@ export class NewOrderComponent implements OnInit {
   submitOrder() {
     const personalDetails = this.myForm.get('details').value;
     const order = this.myForm.get('pizzas').value;
-
-    this.pizzaService.submitOrder({ personalDetails, order}).subscribe(
-      response => {
-        alert("your order has been sent!");
-        this.myForm.reset();
-        this.initForm();
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if (this.myForm.valid) {
+      this.pizzaService.submitOrder({ personalDetails, order}).subscribe(
+        response => {
+          alert("your order has been sent!");
+          this.myForm.reset();
+          this.initForm();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.validateAllFormFields(this.myForm);
+    }
   }
 
+validateAllFormFields(formGroup: FormGroup) {
+  Object.keys(formGroup.controls).forEach(field => {
+    const control = formGroup.get(field);
+    if (control instanceof FormControl) {
+      control.markAsTouched({ onlySelf: true });
+    } else if (control instanceof FormGroup) {
+      this.validateAllFormFields(control);
+    }
+  });
+}
   getPizzaDetails() {
     this.pizzaService.getPizzaDetails().subscribe(
      (response: BasePizzaInfo) => {
@@ -128,16 +141,5 @@ export class NewOrderComponent implements OnInit {
   updateSummary() {
     const items = this.myForm.get('pizzas').value;
     this.getPrices(items);
-  }
-
-  /**
-   * This will submit the order made.
-   *
-   * @param {FormGroup} order
-   * @memberof NewOrderComponent
-   */
-  createOrder(order: FormGroup) {
-    console.log(order.value);
-    alert('Order placed');
   }
 }
