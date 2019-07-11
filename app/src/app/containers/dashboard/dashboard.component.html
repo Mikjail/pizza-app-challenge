@@ -10,7 +10,8 @@
                     <div class="dashboard-top__left__pie-progress">
                         <div class="dashboard-top__left__pie-progress__delivered">
                             <circle-progress
-                                [percent]="reports.completed"
+                                [subtitle]="reports.completed"
+                                [percent]="reports.totalPercentCompleted"
                                 [radius]="80"
                                 [outerStrokeWidth]="10"
                                 [innerStrokeWidth]="8"
@@ -24,7 +25,8 @@
                         
                         <div class="dashboard-top__left__pie-progress__pending">
                             <circle-progress
-                                [percent]="reports.pendings"
+                                [subtitle]="reports.pendings"
+                                [percent]="reports.totalPercentPending"
                                 [radius]="80"
                                 [outerStrokeWidth]="10"
                                 [innerStrokeWidth]="8"
