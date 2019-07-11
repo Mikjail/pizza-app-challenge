@@ -49,6 +49,7 @@ import { DashboardService } from './containers/dashboard/dashboard.service';
       outerStrokeColor: '#18c083',
       outerStrokeGradientStopColor: '#44c2c5',
       innerStrokeColor: '#e7e8ea',
+      subtitleFontSize: '24',
       titleFontSize: '24',
       titleFontWeight: '500',
       subtitleColor: '#0a0a0a',
@@ -56,8 +57,9 @@ import { DashboardService } from './containers/dashboard/dashboard.service';
       animateTitle: false,
       animationDuration: 1000,
       showBackground: false,
-      showSubtitle: false,
-      showUnits: false
+      showTitle: false,
+      showSubtitle: true,
+      showUnits: false,
     })
   ],
   providers: [
