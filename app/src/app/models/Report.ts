@@ -7,5 +7,8 @@ export interface Report {
     completed: number;
     pendings: number;
     timeAndOrders: TimeAndOrders;
-    totalSales: number;
+    totalSales: string;
+    totalPercentCompleted: number;
+    totalPercentPenging: number;
+
 }
