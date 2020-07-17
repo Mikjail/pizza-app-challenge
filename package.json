@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "Pizza App",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pizza App with Angular8 and Node(express)",
   "main": "index.js",
   "engines": {
     "node": "8.10.0"
@@ -13,7 +13,7 @@
     "buildDocker": "docker build -t node-web-app . && npm run runDocker",
     "runDocker": "docker run -p 8080:8080 --env NODE_ENV='prod' --env PORT=8080 -d node-web-app"
   },
-  "author": "",
+  "author": "Mikjail Salazar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
