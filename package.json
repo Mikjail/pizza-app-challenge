@@ -1,5 +1,5 @@
 {
-  "name": "Pizza App",
+  "name": "pizzaapp",
   "version": "1.0.0",
   "description": "Pizza App with Angular8 and Node(express)",
   "main": "index.js",
